@@ -14,5 +14,13 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('daisyui')
+  ],
+
+  daisyui: {
+    themes: ["nord", "sunset"], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
+    darkTheme: "sunset", // name of one of the included themes for dark mode
+  },
+
 };
