@@ -2,11 +2,10 @@
 import { redirect } from "next/dist/server/api-utils"
 import { createClient } from "../supabase/server"
 
-export async function login(email) {
-    console.log(`login function was called with ${email}`)
+export async function login(prevState, formData) {
     const supabase = createClient()
-    
-
+    const email = formData.get('email')
+    console.log(`this is the email: ${email}`)
     const { data, error } = await supabase.auth.signInWithOtp({
       email: email,  
       options: {
@@ -15,5 +14,17 @@ export async function login(email) {
         emailRedirectTo: 'https://localhost:3000/dashboard',
       },
     })
+
+    if (error) {
+        return {
+            error: true,
+            message: "Error authenticating"
+        }
+    }
+
+    return {
+        message: `Email sent successfully to ${email}`
+    }
+
   }
   
