@@ -1,29 +1,57 @@
 'use client'
 
-import { useState } from 'react';
 import Input from "@/components/input";
 import { login } from "@/utils/actions/login-actions";
 import { useFormState } from "react-dom";
-
-const initialState = {
-    message: '',
-    error: false
-}
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "@/utils/validation";
+import FormError from "@/components/form-error";
+import { useState } from "react";
 
 export default function LoginForm() {
 
-const [state, formAction] = useFormState(login, initialState);
+const [lastError, setLastError] = useState()
+const [success, setSuccess] = useState()
+const [isSaving, setSaving] = useState(false)
+
+const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    mode: "onTouched",
+    resolver: zodResolver(loginSchema),
+  })
+
+  const onSubmit = async (data) => {
+    setSaving(true)
+    setLastError()
+    setSuccess()
+    try {
+        await login(data)
+        setSuccess('Login link sent! Please check your email.')
+    } catch (error) {
+        setLastError(error)
+    } finally {
+        setSaving(false)
+    }
+  }
 
   return (
-    <form action={formAction} className="space-y-2">
+    <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <h1>Login</h1>
-      <Input name="email" type="email"/>
-      <button type="submit" size="sm" className="btn w-full">
+      <Input {...register("email")} name="email" id="email" placeholder="Email" type="email"/>
+      <button type="submit" size="sm" className="btn w-full" disabled={isSaving}>
         Sign in with email
       </button>
-      <p className={`${state?.error ? 'text-red-500' : 'text-green-500'}`}>
-            {state?.message}
-        </p>
+      <div className="space-y-4">
+        <FormError error={errors.email}/>
+        <FormError error={lastError}/>
+        {success && <p className="text-green-500 text-sm text-center">{success}</p>}
+      </div>
     </form>
   );
 }

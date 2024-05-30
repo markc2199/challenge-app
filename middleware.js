@@ -3,7 +3,7 @@ import { createClient } from "./utils/supabase/server"
 
 
 export async function middleware(request) {
-  /*  
+
   const { data: {user} } = await createClient().auth.getUser()
   
   if (!user && request.nextUrl.pathname.startsWith('/dashboard')) {
@@ -14,7 +14,7 @@ export async function middleware(request) {
     return Response.redirect(new URL('/dashboard', request.url))
   }
 
-  */
+
 
   return await updateSession(request)
 }
