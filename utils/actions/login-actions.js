@@ -1,4 +1,5 @@
 'use server'
+import { redirect } from "next/navigation"
 import { createClient } from "../supabase/server"
 import { loginSchema } from "../validation"
 
@@ -17,8 +18,13 @@ export async function login(formData) {
       options: {
         // set this to false if you do not want the user to be automatically signed up
         shouldCreateUser: true,
-        //emailRedirectTo: 'http://localhost:3000/dashboard',
       },
     })
   }
+
+  export async function signOut() {
+    const supabase = createClient()
+    const { error } = await supabase.auth.signOut()
+    redirect('/login')
+}
   

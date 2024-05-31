@@ -1,4 +1,11 @@
-export default function Nav() {
+import { createClient } from "@/utils/supabase/server";
+import SignOutButton from "./sign-out-button";
+
+export default async function Nav() {
+
+    const supabase = createClient()
+    const { data: {user}, error } = await supabase.auth.getUser()
+
     return (
             <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -31,8 +38,11 @@ export default function Nav() {
                 <li><a>Item 3</a></li>
                 </ul>
             </div>
-            <div className="navbar-end">
-                <a className="btn">Button</a>
+            <div className="navbar-end space-x-4">
+                <span>
+                    {user?.user_metadata?.fullName ?? user?.email}
+                </span>
+                <SignOutButton />
             </div>
             </div>
     );
