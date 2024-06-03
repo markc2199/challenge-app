@@ -20,6 +20,10 @@ export async function login(formData) {
         shouldCreateUser: true,
       },
     })
+
+    if (error) {
+      throw new Error(`Error authenticating: ${error}`)
+    }
   }
 
   export async function signOut() {
