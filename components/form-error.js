@@ -1,4 +1,3 @@
-import Error from "./error";
 
 export default function FormError({ error }) {
     return (

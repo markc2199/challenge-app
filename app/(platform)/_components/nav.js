@@ -22,7 +22,7 @@ export default async function Nav() {
     </div>
   </div>
   <div className="navbar-center">
-    <a className="btn btn-ghost text-xl">daisyUI</a>
+    <a className="btn btn-ghost text-xl">challenger</a>
   </div>
   <div className="navbar-end">
     <SignOutButton />

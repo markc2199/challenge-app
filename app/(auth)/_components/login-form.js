@@ -21,8 +21,6 @@ const router = useRouter()
 const {
     register,
     handleSubmit,
-    watch,
-    setValue,
     formState: { errors },
   } = useForm({
     mode: "onTouched",
@@ -58,7 +56,6 @@ const {
       </button>
       <div className="space-y-4">
         <FormError error={errors.email}/>
-        <FormError error={errors.name}/>
         <FormError error={lastError}/>
         {success && <p className="text-green-500 text-sm text-center">{success}</p>}
       </div>
