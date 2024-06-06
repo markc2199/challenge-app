@@ -4,13 +4,27 @@ import CenteredCard from "@/components/centered-card";
 import Modal from "../_components/modal";
 import Stat from "../_components/stat";
 import { PlusCircle } from "lucide-react";
+import { createClient } from "@/utils/supabase/server";
+import { fetchGroups } from "@/utils/actions/group-actions";
+import GroupCardList from "../_components/group-card-list";
 
-export default function Page() {
+export default async function Page() {
+
+  const supabase = createClient()
+
+  try {
+    const groups = await fetchGroups()
+  } catch(error) {
+    console.log(error)
+  }
+
+
+
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center pt-10">
       <div className="w-full max-w-screen-lg grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Flex container for "My Groups" heading and Modal */}
-        <div className="col-span-1 md:col-span-2 flex items-center justify-between px-6">
+        <div className="col-span-1 md:col-span-2 flex items-center justify-between">
           <h6 className="font-semibold">My Groups</h6>
           <Modal>
             <span className="hidden md:block">Create New Group</span>
@@ -19,15 +33,7 @@ export default function Page() {
         </div>
 
         {/* The rest of your content */}
-        <div className="flex justify-center">
-          <CenteredCard>Crossfit yoooooo</CenteredCard>
-        </div>
-        <div className="flex justify-center">
-          <CenteredCard>Other group</CenteredCard>
-        </div>
-        <div className="flex justify-center">
-          <CenteredCard>Crossfit yoooooo</CenteredCard>
-        </div>
+        <GroupCardList />
       </div>
     </div>
   );

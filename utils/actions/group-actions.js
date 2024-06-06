@@ -1,4 +1,5 @@
 'use server'
+import { revalidatePath } from "next/cache"
 import { createClient } from "../supabase/server";
 import { groupSchema } from "../validation";
 
@@ -18,7 +19,7 @@ export async function createGroup(formData) {
     // create the group
 
     const supabase = createClient()
-
+    
     const { data, error } = await supabase
     .from('groups')
     .insert([
@@ -28,9 +29,11 @@ export async function createGroup(formData) {
     },
     ])
     .select()
+        
 
     if (error) {
-        throw new Error("Error creating group")
+        console.log(error)
+        throw new Error(error)
     }
 
     // create the group_membership with the creator as an owner
@@ -49,5 +52,23 @@ export async function createGroup(formData) {
     if (groupMembershipError) {
         throw new Error("Error assigning group membership")
     }
+
+    revalidatePath('/dashboard')
+        
+}
+
+export async function fetchGroups() {
+
+    const supabase = createClient()
+
+    let { data: groups, error } = await supabase
+    .from('groups')
+    .select('*')
+
+    if (error) {
+        console.log(error)
+    }
+
+    return groups;
         
 }

@@ -3,10 +3,16 @@
 import GroupForm from "./group-form";
 
 export default function Modal({ children }) {
+
+    const closeModal = () => {
+        document.getElementById('my_modal_3').close();
+    };
+
+
     return (
    <>
         {/* You can open the modal using document.getElementById('ID').showModal() method */}
-        <button className="btn rounded-xl" onClick={()=>document.getElementById('my_modal_3').showModal()}>{children}</button>
+        <button className="btn rounded-xl btn-neutral dark:btn-primary" onClick={()=>document.getElementById('my_modal_3').showModal()}>{children}</button>
         <dialog id="my_modal_3" className="modal">
         <div className="modal-box w-full max-w-lg md:max-w-xl md:h-auto p-0">
             <form method="dialog">
@@ -14,8 +20,8 @@ export default function Modal({ children }) {
             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
             </form>
             <div className="p-4 md:p-6">
-                <GroupForm />
-             </div>
+                <GroupForm onSuccess={closeModal}/>
+            </div> 
         </div>
         </dialog>
 </>

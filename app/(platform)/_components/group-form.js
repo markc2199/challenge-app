@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createGroup } from "@/utils/actions/group-actions";
 
-export default function GroupForm() {
+export default function GroupForm({ onSuccess }) {
 
     const {
         register,
@@ -27,13 +27,14 @@ export default function GroupForm() {
     const onSubmit = async (data) => {
         try {
             await createGroup(data)
+            onSuccess()
         } catch (error) {
             setLastError(error)
         }
     }
 
     return (
-        <>
+
         <form action={handleSubmit(onSubmit)} className="space-y-6">
           <h1 className="text-center font-semibold pb-4">Create a Group</h1>
           <Input {...register("name")} name="name" id="name" placeholder="Group Name" type="text"/>
@@ -46,6 +47,6 @@ export default function GroupForm() {
             <FormError error={lastError}/>
           </div>
         </form>
-        </>
+    
       );
 }
