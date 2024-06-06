@@ -65,9 +65,29 @@ export async function fetchGroups() {
     .select('*')
 
     if (error) {
-        console.log(error)
+        throw new Error("Cannot fetch groups")
     }
 
     return groups;
         
+}
+
+export async function fetchGroupData(groupId) {
+
+    const supabase = createClient()
+
+    let { data: group, error } = await supabase
+    .from('groups')
+    .select('*')
+    .eq('id', groupId)
+
+    if (error) {
+        throw new Error("Cannot get group info")
+    }
+
+    if (group.length < 1) {
+        throw new Error("Group does not exist")
+    }
+
+    return group
 }

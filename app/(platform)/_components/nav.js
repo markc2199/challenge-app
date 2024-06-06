@@ -24,9 +24,11 @@ export default async function Nav() {
   <div className="navbar-center">
     <a className="btn btn-ghost text-xl">challenger</a>
   </div>
-  <div className="navbar-end">
+  {user && (
+    <div className="navbar-end">
     <SignOutButton />
   </div>
+  )}
 </div>
     )
 

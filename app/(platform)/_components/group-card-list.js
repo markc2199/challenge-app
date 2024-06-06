@@ -12,7 +12,7 @@ export default async function GroupCardList() {
             )}
             {groups.map((group) => {
                     return (
-                        <GroupCard key={group.id} name={group.name} description={group.description} />
+                        <GroupCard key={group.id} name={group.name} description={group.description} groupId={group.id} />
                     )
                 })
             }
