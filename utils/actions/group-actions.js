@@ -32,7 +32,6 @@ export async function createGroup(formData) {
         
 
     if (error) {
-        console.log(error)
         throw new Error(error)
     }
 

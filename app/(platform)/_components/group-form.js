@@ -39,7 +39,7 @@ export default function GroupForm({ onSuccess }) {
           <h1 className="text-center font-semibold pb-4">Create a Group</h1>
           <Input {...register("name")} name="name" id="name" placeholder="Group Name" type="text"/>
           <Input {...register("description")} name="description" id="description" placeholder="Description (optional)" type="description"/>
-          <button type="submit" size="sm" className="btn w-full" disabled={isSaving}>
+          <button type="submit" size="sm" className="btn w-full dark:btn-primary btn-neutral" disabled={isSaving}>
             Create
           </button>
           <div className="space-y-4">
