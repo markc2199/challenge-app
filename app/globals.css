@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 body {
-  @apply container mx-auto max-w-4xl text-black dark:text-slate-100
+  @apply container mx-auto max-w-6xl text-black dark:text-slate-100
 }

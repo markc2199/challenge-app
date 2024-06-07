@@ -1,5 +1,6 @@
 import { fetchGroups } from "@/utils/actions/group-actions";
 import GroupCard from "./group-card";
+import Card from "@/components/card";
 
 export default async function GroupCardList() {
 
@@ -12,7 +13,7 @@ export default async function GroupCardList() {
             )}
             {groups.map((group) => {
                     return (
-                        <GroupCard key={group.id} name={group.name} description={group.description} groupId={group.id} />
+                        <Card key={group.id} name={group.name} description={group.description} groupId={group.id} />
                     )
                 })
             }
