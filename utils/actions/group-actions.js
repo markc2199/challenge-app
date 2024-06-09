@@ -1,7 +1,7 @@
 'use server'
 import { revalidatePath } from "next/cache"
 import { createClient } from "../supabase/server";
-import { groupSchema } from "../validation";
+import { groupSchema, inviteSchema } from "../validation";
 
 export async function createGroup(formData) {
 
@@ -65,7 +65,8 @@ export async function fetchGroups() {
     .select('*')
 
     if (error) {
-        throw new Error("Cannot fetch groups")
+        console.log(error)
+        //throw new Error("Cannot fetch groups")
     }
 
     return groups;
@@ -90,4 +91,93 @@ export async function fetchGroupData(groupId) {
     }
 
     return group
+}
+
+export async function InviteMember(formData, groupId, inviterId, groupName) {
+
+    // validate the data
+
+    const validated = inviteSchema.safeParse(formData)
+
+    if (!validated.success) {
+        throw new Error("Invalid data")
+    }
+
+    const email = validated.data.email
+
+    // get user ID based on email
+    const supabase = createClient()
+    
+
+   
+    let { data: profile, error: profileError } = await supabase
+    .from('profiles')
+    .select('id')
+    .eq('email', email)
+    .single()
+
+    const user_id = profile.id
+    
+    // create the invite record
+
+
+    const { data, error } = await supabase
+    .from('invites')
+    .insert([
+    { 
+        group_name: groupName,
+        group_id: groupId,
+        inviter_id: inviterId,
+        invite_status: 'pending',
+        email: email,
+        user_id
+    },
+    ])
+    .select()
+
+    if (error) {
+        throw new Error("Error inviting user")
+    }
+        
+}
+
+export async function fetchInvites(user) {
+
+    const supabase = createClient()
+
+    let { data: invites, error: inviteError } = await supabase
+    .from('invites')
+    .select('*')
+    .eq('invite_status', 'pending')
+    .eq('email', user.email)
+
+    if (inviteError) {
+        console.log(error)
+    }
+
+    return invites
+}
+
+export async function acceptInvite(inviteId) {
+
+    const supabase = createClient()
+
+    // update invite to accepted
+
+    const { data, error } = await supabase
+    .from('invites')
+    .update({ invite_status: 'accepted' })
+    .eq('id', inviteId)
+    .select()
+
+    if (error) {
+        throw new Error("Error accepting invite: ", error)
+    }
+
+    revalidatePath('/dashboard')
+
+    //once the status is updated to accepted, a supabase trigger adds a record in group_membership table
+        
+
+
 }

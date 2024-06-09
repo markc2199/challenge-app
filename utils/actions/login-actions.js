@@ -3,6 +3,21 @@ import { redirect } from "next/navigation"
 import { createClient } from "../supabase/server"
 import { loginSchema } from "../validation"
 
+export async function loginWithGoogle(){
+  const supabase = createClient()
+
+  const data = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `https://anmhwyrcskpewutorght.supabase.co/auth/v1/callback`,
+    },
+  })
+
+  return data
+  
+
+}
+
 export async function login(formData) {
     const validated = loginSchema.safeParse(formData)
 
@@ -22,6 +37,7 @@ export async function login(formData) {
     })
 
     if (error) {
+      console.log(error)
       throw new Error(`Error authenticating: ${error}`)
     }
   }
@@ -30,5 +46,18 @@ export async function login(formData) {
     const supabase = createClient()
     const { error } = await supabase.auth.signOut()
     redirect('/login')
+}
+
+export async function getProfile(user) {
+  const supabase = createClient()
+
+
+  let { data: profile, error } = await supabase
+  .from('profiles')
+  .select('*')
+  .eq('id', user.id)
+
+  return profile
+        
 }
   

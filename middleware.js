@@ -19,6 +19,10 @@ export async function middleware(request) {
   }
 
 
+  if (user && request.nextUrl.pathname === '/') {
+    return Response.redirect(new URL('/dashboard', request.url))
+  }
+
 
   return await updateSession(request)
 }

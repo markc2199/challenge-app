@@ -9,6 +9,7 @@ import { loginSchema } from "@/utils/validation";
 import FormError from "@/components/form-error";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import OAuthLoginForm from "@/app/(platform)/_components/oauth-login-form";
 
 export default function LoginForm() {
 
@@ -26,6 +27,7 @@ const {
     mode: "onTouched",
     resolver: zodResolver(loginSchema),
   })
+
 
   const onSubmit = async (data) => {
     setSaving(true)
@@ -48,6 +50,7 @@ const {
 
   return (
     <>
+    <OAuthLoginForm />
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <h1>Login</h1>
       <Input {...register("email")} name="email" id="email" placeholder="Email" type="email" inputvariant="email"/>

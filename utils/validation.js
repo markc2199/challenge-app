@@ -12,3 +12,9 @@ export const groupSchema = z.object({
     }),
     description: z.string().optional()
 })
+
+export const inviteSchema = z.object({
+    email: z.string().email({
+        message: "Invalid Email"
+    })
+})
