@@ -2,6 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import Notification from "./notification";
 import { fetchInvites } from "@/utils/actions/group-actions";
 import InviteNotification from "./invite-notification";
+import Skeleton from "./skeleton";
 
 export default async function NotificationList() {
 

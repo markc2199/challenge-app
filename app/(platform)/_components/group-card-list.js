@@ -1,6 +1,9 @@
 import { fetchGroups } from "@/utils/actions/group-actions";
 import GroupCard from "./group-card";
 import Card from "@/components/card";
+import { Suspense } from "react";
+import CardSkeleton from "./card-skeleton";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 
 export default async function GroupCardList() {
 
@@ -13,7 +16,9 @@ export default async function GroupCardList() {
             )}
             {groups.map((group) => {
                     return (
-                        <Card key={group.id} name={group.name} description={group.description} groupId={group.id} />
+                            <Suspense key={group.id} fallback={<CardSkeleton />}>
+                                <Card name={group.name} description={group.description} groupId={group.id} />
+                            </Suspense>
                     )
                 })
             }

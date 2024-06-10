@@ -65,8 +65,7 @@ export async function fetchGroups() {
     .select('*')
 
     if (error) {
-        console.log(error)
-        //throw new Error("Cannot fetch groups")
+        throw new Error(`Cannot fetch groups ${error}`)
     }
 
     return groups;
@@ -105,10 +104,26 @@ export async function InviteMember(formData, groupId, inviterId, groupName) {
 
     const email = validated.data.email
 
-    // get user ID based on email
-    const supabase = createClient()
-    
+    // check if user exists with this email
 
+    const supabase = createClient()
+
+    let { data: validatedEmail, error: emailError } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('email', email)
+
+    if(emailError) {
+        throw new error(`Error during validation: ${emailError}`)
+    }
+
+    if (validatedEmail.length < 1) {
+        throw new Error(`No user exists with email ${email}`)
+    }
+
+
+    // get user ID based on email
+   
    
     let { data: profile, error: profileError } = await supabase
     .from('profiles')
@@ -117,9 +132,31 @@ export async function InviteMember(formData, groupId, inviterId, groupName) {
     .single()
 
     const user_id = profile.id
+
+    // check if user is already in the group
+    let { data: groupData, error: groupError } = await supabase
+    .from('group_memberships')
+    .select('*')
+    .eq('group_id', groupId)
+    .eq('user_id', user_id)
+
+    if (groupData.length > 0) {
+        throw new Error(`${email} is already in this group`)
+    }
+
+    // check if there is already a pending invite for this user
+    let { data: invite, error: inviteError } = await supabase
+    .from('invites')
+    .select('*')
+    .eq('group_id', groupId)
+    .eq('user_id', user_id)
+    .eq('invite_status', 'pending')
+
+    if (invite.length > 0) {
+        throw new Error(`${email} has already been invited`)
+    }
     
     // create the invite record
-
 
     const { data, error } = await supabase
     .from('invites')

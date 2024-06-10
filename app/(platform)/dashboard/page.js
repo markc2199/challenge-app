@@ -34,10 +34,7 @@ export default async function Page() {
       <div className="w-full max-w-screen-lg grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="col-span-1 md:col-span-2 space-y-8">
           <div>
-            <h6 className="font-semibold text-4xl">{`Welcome, ${profile[0].display_name ?? user.email}`}</h6>
-          </div>
-          <div>
-            <p className="text-xl">Jump into one of your existing groups below or create a new one.</p>
+            <h6 className="font-semibold text-4xl">{`👋 Welcome, ${profile[0].display_name ?? user.email}`}</h6>
           </div>
           <div>
             <NotificationList />

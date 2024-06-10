@@ -26,10 +26,13 @@ export default function MemberInviteForm({ onSuccess, groupId, inviterId, groupN
 
     const onSubmit = async (data) => {
         try {
+            setSaving(true)
             await InviteMember(data, groupId, inviterId, groupName)
             onSuccess()
         } catch (error) {
             setLastError(error)
+        } finally {
+          setSaving(false)
         }
     }
 

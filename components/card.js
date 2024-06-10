@@ -10,7 +10,7 @@ export default function Card({ name, description, groupId }) {
             <div className="flex justify-between">
                 <p>{description}</p>
                 <Link href={`/groups/${groupId}`}>
-                    <button className="btn btn-square btn-md btn-neutral dark:btn-primary">
+                    <button className="btn btn-square btn-md btn-accent dark:btn-primary">
                      <MoveRight />
                     </button>
                 </Link>
