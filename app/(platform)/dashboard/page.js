@@ -3,7 +3,7 @@ import Stats from "../_components/stats";
 import CenteredCard from "@/components/centered-card";
 import Modal from "../_components/group-modal";
 import Stat from "../_components/stat";
-import { PlusCircle } from "lucide-react";
+import { Pencil, PlusCircle } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
 import { fetchGroups } from "@/utils/actions/group-actions";
 import GroupCardList from "../_components/group-card-list";
@@ -33,16 +33,19 @@ export default async function Page() {
     <div className="flex justify-center pt-10">
       <div className="w-full max-w-screen-lg grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="col-span-1 md:col-span-2 space-y-8">
-          <div>
-            <h6 className="font-semibold text-4xl">{`👋 Welcome, ${profile[0].display_name ?? user.email}`}</h6>
+          <div className="flex space-x-4">
+            <div className="text-4xl">
+              👋
+            </div>
+            <h6 className="font-semibold text-3xl md:text-4xl">{`Welcome, ${profile[0].display_name ?? user.email}`}</h6>
           </div>
           <div>
             <NotificationList />
           </div>
         </div>
         {/* Flex container for "My Groups" heading and Modal */}
-        <div className="col-span-1 md:col-span-2 flex items-center justify-center space-x-8 md:justify-between pt-4">
-          <h6 className="font-semibold">My Groups</h6>
+        <div className="col-span-1 md:col-span-2 flex items-center space-x-8 justify-between pt-4 px-6">
+          <h6 className="font-bold text-2xl">My Groups</h6>
           <div>
             <GroupModal>
             <span className="hidden md:block">Create New Group</span>
