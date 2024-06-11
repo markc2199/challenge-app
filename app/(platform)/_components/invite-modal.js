@@ -4,12 +4,12 @@ import Modal from "./modal";
 
 export default function InviteModal({ children, groupId, inviterId, groupName }) {
 
-    const closeModal = () => {
-        document.getElementById('my_modal_3').close();
+    const closeModal = (id) => {
+        document.getElementById(id).close();
     };
 
     return (
-        <Modal content={<MemberInviteForm onSuccess={closeModal} groupId={groupId} inviterId={inviterId} groupName={groupName}/>}>
+        <Modal id="invite_modal" content={<MemberInviteForm onSuccess={() => closeModal("invite_modal")} groupId={groupId} inviterId={inviterId} groupName={groupName}/>}>
             {children}
         </Modal>
     );

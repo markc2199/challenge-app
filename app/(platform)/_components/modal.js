@@ -1,13 +1,13 @@
 'use client'
 
-export default function Modal({ children, content }) {
+export default function Modal({ children, content, id }) {
 
    
     return (    
     <>
         {/* You can open the modal using document.getElementById('ID').showModal() method */}
-        <button className="btn rounded-xl btn-primary" onClick={()=>document.getElementById('my_modal_3').showModal()}>{children}</button>
-        <dialog id="my_modal_3" className="modal">
+        <button className="btn rounded-xl btn-primary" onClick={()=>document.getElementById(id).showModal()}>{children}</button>
+        <dialog id={id} className="modal">
             <div className="modal-box w-full max-w-full h-full md:max-w-xl md:h-auto md:rounded-lg p-0 m-0">
                 <form method="dialog">
                 {/* if there is a button in form, it will close the modal */}

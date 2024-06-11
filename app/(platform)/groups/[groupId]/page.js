@@ -1,9 +1,9 @@
 import { fetchGroupData } from "@/utils/actions/group-actions";
 import { notFound } from "next/navigation";
-import Modal from "../../_components/group-modal";
 import { PlusCircle } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
 import InviteModal from "../../_components/invite-modal";
+import ChallengeModal from "../../_components/challenge-modal";
 
 export default async function Page({ params }) {
 
@@ -47,15 +47,12 @@ export default async function Page({ params }) {
               </div>
 
               <div>
-                <Modal>
+                <ChallengeModal>
                 <span className="hidden md:block">Create New Challenge</span>
                 <PlusCircle />
-              </Modal>
+              </ChallengeModal>
               </div>
-
-              
             </div>
-            
           
           )}
           

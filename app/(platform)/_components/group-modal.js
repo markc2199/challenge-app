@@ -5,13 +5,13 @@ import Modal from "./modal";
 
 export default function GroupModal({ children }) {
 
-    const closeModal = () => {
-        document.getElementById('my_modal_3').close();
+    const closeModal = (id) => {
+        document.getElementById(id).close();
     };
 
 
     return (
-        <Modal content={<GroupForm onSuccess={closeModal}/>}>
+        <Modal id="group_modal" content={<GroupForm onSuccess={() => closeModal("group_modal")}/>}>
             {children}
         </Modal>
     );
