@@ -22,7 +22,7 @@ export default async function NotificationList() {
     }
     
     return (
-        <div>
+        <div className="space-y-2">
 
             {invites.length > 0 && (
                invites.map((invite) => {

@@ -1,14 +1,8 @@
-import Card from "@/components/card";
-import Stats from "../_components/stats";
-import CenteredCard from "@/components/centered-card";
-import Modal from "../_components/group-modal";
-import Stat from "../_components/stat";
-import { Pencil, PlusCircle } from "lucide-react";
+import { PlusCircle } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
 import { fetchGroups } from "@/utils/actions/group-actions";
 import GroupCardList from "../_components/group-card-list";
 import GroupModal from "../_components/group-modal";
-import Notification from "../_components/notification";
 import NotificationList from "../_components/notification-list";
 import { getProfile } from "@/utils/actions/login-actions";
 
@@ -20,7 +14,6 @@ export default async function Page() {
 
   const profile = await getProfile(user)
 
-  console.log(profile)
 
   try {
     const groups = await fetchGroups()

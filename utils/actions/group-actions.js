@@ -16,6 +16,7 @@ export async function createGroup(formData) {
     const name = validated.data.name
     const description = validated.data.description
 
+
     // create the group
 
     const supabase = createClient()

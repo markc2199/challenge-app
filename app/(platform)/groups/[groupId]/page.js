@@ -47,7 +47,7 @@ export default async function Page({ params }) {
               </div>
 
               <div>
-                <ChallengeModal>
+                <ChallengeModal groupId={params.groupId}>
                 <span className="hidden md:block">Create New Challenge</span>
                 <PlusCircle />
               </ChallengeModal>
@@ -59,6 +59,7 @@ export default async function Page({ params }) {
         </div>
 
         {/* The rest of your content */}
+
       </div>
     </div>
   );

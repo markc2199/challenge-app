@@ -18,3 +18,15 @@ export const inviteSchema = z.object({
         message: "Invalid Email"
     })
 })
+
+export const challengeSchema = z.object({
+    title: z.string().min(1, {
+        message: "Challenge title is required"
+    }),
+    description: z.string().optional(),
+    item: z.string().min(1, {
+        message: "Challenge item is required"
+    }),
+    start: z.string().date("Must provide a start date"),
+    end: z.string().date("Must provide an end date"),
+})
