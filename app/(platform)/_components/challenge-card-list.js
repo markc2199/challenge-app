@@ -1,24 +1,22 @@
-import { fetchGroups } from "@/utils/actions/group-actions";
-import GroupCard from "./group-card";
-import Card from "@/components/card";
 import { Suspense } from "react";
 import CardSkeleton from "./card-skeleton";
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import ChallengeCard from "./challenge-card";
+import { fetchChallenges } from "@/utils/actions/challenge-actions";
 
-export default async function ChallengeCardList() {
+export default async function ChallengeCardList({ groupId }) {
 
     // TODO make this fetch challenges
-    const groups = await fetchGroups()
-    
+    const challenges = await fetchChallenges(groupId)
+
     return (
         <>
-            {groups.length < 1 && (
-                <p>No groups yet. Create one now!</p>
+            {challenges.length < 1 && (
+                <p>No challenges yet.</p>
             )}
-            {groups.map((group) => {
+            {challenges.map((challenge) => {
                     return (
-                            <Suspense key={group.id} fallback={<CardSkeleton />}>
-                                <Card name={group.name} description={group.description} groupId={group.id} />
+                            <Suspense key={challenge.id} fallback={<CardSkeleton />}>
+                                <ChallengeCard name={challenge.name} description={challenge.description} start_date={challenge.start_date} end_date={challenge.end_date} />
                             </Suspense>
                     )
                 })

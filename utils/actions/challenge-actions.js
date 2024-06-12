@@ -1,8 +1,9 @@
 'use server'
+import { revalidatePath } from "next/cache";
 import { createClient } from "../supabase/server";
 import { challengeSchema } from "../validation";
 
-export default async function createChallenge(formData, groupId) {
+export async function createChallenge(formData, groupId) {
 
     const validated = challengeSchema.safeParse(formData)
 
@@ -48,5 +49,26 @@ export default async function createChallenge(formData, groupId) {
     if (insertError) {
         throw new Error(`Error creating challenge and item: ${insertError.message}`);
     }
+
+    revalidatePath(`/groups/${groupId}`)
+
+}
+
+export async function fetchChallenges(groupId) {
+
+    const supabase = createClient()
+
+    // fetch challenges that belong to the group
+     
+    let { data: challenges, error } = await supabase
+    .from('challenge')
+    .select('*')
+    .eq('group_id', groupId)
+
+    if (error) {
+        throw new Error("Error fetching challenges")
+    }
+        
+    return challenges;
 
 }

@@ -7,7 +7,7 @@ import { challengeSchema, groupSchema } from "@/utils/validation";
 import FormError from "@/components/form-error";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import createChallenge from "@/utils/actions/challenge-actions";
+import { createChallenge } from "@/utils/actions/challenge-actions";
 
 export default function ChallengeForm({ onSuccess, groupId }) {
 
