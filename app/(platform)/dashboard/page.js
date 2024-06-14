@@ -50,7 +50,7 @@ export default async function Page() {
 
         {/* The rest of your content */}
   
-          <GroupCardList />
+          <GroupCardList/>
         
         
       </div>

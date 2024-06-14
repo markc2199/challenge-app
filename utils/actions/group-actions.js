@@ -216,6 +216,22 @@ export async function acceptInvite(inviteId) {
 
     //once the status is updated to accepted, a supabase trigger adds a record in group_membership table
         
+}
 
+export async function checkGroupMembership(userId, groupId) {
+
+    const supabase = createClient()
+
+    const { data, error } = await supabase
+    .from('group_memberships')
+    .select('role')
+    .eq('user_id', userId)
+    .eq('group_id', groupId)
+
+    if (error) {
+        throw new Error(`Error checking group membership: ${error}`)
+    }
+
+    return data
 
 }

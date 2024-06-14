@@ -1,7 +1,7 @@
 'use server'
 import { revalidatePath } from "next/cache";
 import { createClient } from "../supabase/server";
-import { challengeSchema } from "../validation";
+import { challengeSchema, scoreSchema } from "../validation";
 
 export async function createChallenge(formData, groupId) {
 
@@ -70,5 +70,88 @@ export async function fetchChallenges(groupId) {
     }
         
     return challenges;
+
+}
+
+export async function fetchChallengeData(challengeId) {
+
+    const supabase = createClient()
+
+    let { data: challenge, error } = await supabase
+    .from('challenge')
+    .select('*')
+    .eq('id', challengeId)
+
+    if (error) {
+        throw new Error("Cannot get challenge info")
+    }
+
+    if (challenge.length < 1) {
+        throw new Error("Group does not exist")
+    }
+
+    return challenge
+
+}
+
+export async function updateScore(formData) {
+
+    const validated = scoreSchema.safeParse(formData)
+
+    if (!validated) {
+        throw new error("Invalid data")
+    }
+    
+    const supabase = createClient();
+
+    const { data, error } = await supabase
+    .from('scores')
+    .insert([
+    { 
+        score: validated.data.score, 
+        challenge_item_id: formData.challengeItemId },
+    ])
+    .select()
+
+    if (error) {
+        throw new Error(`Error updating score: ${error.message}`)
+    }
+        
+}
+
+export async function getScores(challengeItemId) {
+
+    console.log('cid', challengeItemId)
+
+    const supabase = createClient()
+
+    const { data, error } = await supabase
+    .rpc('get_total_scores_for_item', { challenge_item_id_arg: challengeItemId })
+    .select()
+
+    console.log('data: ', data)
+
+    if (error) {
+        throw new Error(`Cannot fetch scores: ${error.message}`)
+    }
+
+    return data
+
+}
+
+export async function fetchChallengeItem(challengeId) {
+
+    const supabase = createClient()
+
+    let { data: challengeItem, error } = await supabase
+    .from('challenge_items')
+    .select('*')
+    .eq('challenge_id', challengeId)
+
+    if (error) {
+        throw new Error("Cannot get challenge info")
+    }
+
+    return challengeItem
 
 }

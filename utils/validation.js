@@ -30,3 +30,7 @@ export const challengeSchema = z.object({
     start: z.string().date("Must provide a start date"),
     end: z.string().date("Must provide an end date"),
 })
+
+export const scoreSchema = z.object({
+    score: z.coerce.number()
+})

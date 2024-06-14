@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function ChallengeCard({ name, description, start_date, end_date }) {
+export default function ChallengeCard({ name, description, start_date, end_date, challengeId, groupId }) {
     return (
         <div className="card w-full bg-base-100 shadow-xl">
         <div className="card-body bg-slate-600 rounded-lg flex flex-col justify-center space-y-2 px-24">
@@ -16,7 +16,7 @@ export default function ChallengeCard({ name, description, start_date, end_date 
                 </div>
 
             <div className="flex justify-center w-full">
-                <Link className="w-full" href={``}>
+                <Link className="w-full" href={`/groups/${groupId}/challenges/${challengeId}`}>
                     <button className="btn btn-primary w-full">
                      Leaderboard
                     </button>

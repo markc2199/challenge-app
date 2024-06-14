@@ -17,7 +17,7 @@ export default async function GroupCardList() {
             {groups.map((group) => {
                     return (
                             <Suspense key={group.id} fallback={<CardSkeleton />}>
-                                <Card name={group.name} description={group.description} groupId={group.id} />
+                                <Card name={group.name} description={group.description} groupId={group.id}/>
                             </Suspense>
                     )
                 })

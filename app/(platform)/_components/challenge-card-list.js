@@ -16,7 +16,7 @@ export default async function ChallengeCardList({ groupId }) {
             {challenges.map((challenge) => {
                     return (
                             <Suspense key={challenge.id} fallback={<CardSkeleton />}>
-                                <ChallengeCard name={challenge.name} description={challenge.description} start_date={challenge.start_date} end_date={challenge.end_date} />
+                                <ChallengeCard challengeId={challenge.id} name={challenge.name} description={challenge.description} start_date={challenge.start_date} end_date={challenge.end_date} groupId={groupId}/>
                             </Suspense>
                     )
                 })
