@@ -7,6 +7,7 @@ import { notFound } from "next/navigation";
 
 export default async function Page({ params }) {
 
+
       // get user
   const supabase = createClient();
 
@@ -46,8 +47,8 @@ export default async function Page({ params }) {
           {/* Flex container for "My Groups" heading and Modal */}
   
           {/* The rest of your content */}
-          <ScoreModal challengeItemId={challengeItem[0]?.id}>Submit a score</ScoreModal>
-          <Leaderboard challengeItemId={challengeItem[0]?.id}/>
+          <ScoreModal challengeItemId={challengeItem[0]?.id} groupId={params.groupId} challengeId={params.challengeId}>Submit a score</ScoreModal>
+          <Leaderboard challengeItemId={challengeItem[0]?.id} challengeItemUnit={challengeItem[0]?.name}/>
           
         </div>
       </div>

@@ -9,7 +9,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { updateScore } from "@/utils/actions/challenge-actions";
 
-export default function ScoreForm({ onSuccess, challengeItemId }) {
+export default function ScoreForm({ onSuccess, challengeItemId, groupId, challengeId }) {
 
     const {
         register,
@@ -28,6 +28,8 @@ export default function ScoreForm({ onSuccess, challengeItemId }) {
         try {
             setSaving(true)
             data.challengeItemId = challengeItemId
+            data.challengeId = challengeId
+            data.groupId = groupId
             await updateScore(data)
             onSuccess()
         } catch (error) {

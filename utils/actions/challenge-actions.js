@@ -116,12 +116,12 @@ export async function updateScore(formData) {
     if (error) {
         throw new Error(`Error updating score: ${error.message}`)
     }
+
+    revalidatePath(`/groups/${formData.groupId}/challenges/${formData.challengeId}`)
         
 }
 
 export async function getScores(challengeItemId) {
-
-    console.log('cid', challengeItemId)
 
     const supabase = createClient()
 
