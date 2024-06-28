@@ -1,12 +1,25 @@
 import Link from "next/link";
+import Badge from "./badge";
 
 export default function ChallengeCard({ name, description, start_date, end_date, challengeId, groupId }) {
+
+    const today = new Date()
+    const endDate = new Date(end_date)
+
+
+    // check if challenge is still active
+    const isActive = today < endDate
+
     return (
         <div className="card w-full bg-base-100 shadow-xl">
-        <div className="card-body bg-slate-600 rounded-lg flex flex-col justify-center space-y-2 px-24">
+        <div className="card-body bg-slate-600 rounded-lg flex flex-col justify-center space-y-2 px-4 md:px-12">
         
                 <div className="space-y-1">
-                    <h2 className="card-title font-bold text-2xl">{name}</h2> 
+                    <div className="flex space-x-2 items-center">
+                        <h2 className="card-title font-bold text-2xl">{name}</h2>
+                        <Badge className={`${isActive ? 'badge-primary badge-outline' : 'badge-neutral badge-outline'}`}>{isActive ? `Active` : 'Ended'}</Badge> 
+                    </div>
+                    
                     <p className="text-lg">{description}</p>
                 </div>
 

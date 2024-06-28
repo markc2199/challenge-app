@@ -1,10 +1,11 @@
-import { PlusCircle } from "lucide-react";
+import { Pencil, PlusCircle } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
 import { fetchGroups } from "@/utils/actions/group-actions";
 import GroupCardList from "../_components/group-card-list";
 import GroupModal from "../_components/group-modal";
 import NotificationList from "../_components/notification-list";
 import { getProfile } from "@/utils/actions/login-actions";
+import DisplayNameModal from "../_components/display-name-modal";
 
 export default async function Page() {
 
@@ -14,13 +15,11 @@ export default async function Page() {
 
   const profile = await getProfile(user)
 
-
   try {
     const groups = await fetchGroups()
   } catch(error) {
     console.log(error)
   }
-
 
   return (
     <div className="flex justify-center pt-10">
@@ -30,14 +29,21 @@ export default async function Page() {
             <div className="text-4xl">
               👋
             </div>
-            <h6 className="font-semibold text-3xl md:text-4xl">{`Welcome, ${profile[0].display_name ?? user.email}`}</h6>
+            
+            <div className="flex space-x-1 items-center">
+              <DisplayNameModal>
+                <h6 className="font-semibold text-3xl md:text-4xl">{`Welcome, ${profile[0].display_name ?? user.email}`}</h6>
+              </DisplayNameModal>
+              
+              {/* <DisplayNameModal><Pencil height={16} width={16}/></DisplayNameModal> */}
+            </div>
           </div>
           <div>
             <NotificationList />
           </div>
         </div>
         {/* Flex container for "My Groups" heading and Modal */}
-        <div className="col-span-1 md:col-span-2 flex items-center space-x-8 justify-between pt-4 px-6">
+        <div className="col-span-1 md:col-span-2 flex items-center space-x-8 justify-between pt-2 px-6">
           <h6 className="font-bold text-2xl">My Groups</h6>
           <div>
             <GroupModal>

@@ -34,3 +34,9 @@ export const challengeSchema = z.object({
 export const scoreSchema = z.object({
     score: z.coerce.number()
 })
+
+export const displayNameSchema = z.object({
+    display_name: z.string().min(1, {
+        message: "Must be at least 1 character"
+    })
+})

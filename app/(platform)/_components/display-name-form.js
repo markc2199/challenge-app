@@ -3,13 +3,13 @@
 import Input from "@/components/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { inviteSchema } from "@/utils/validation";
+import { displayNameSchema } from "@/utils/validation";
 import FormError from "@/components/form-error";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { InviteMember, createGroup } from "@/utils/actions/group-actions";
+import { updateDisplayName } from "@/utils/actions/user-actions";
 
-export default function MemberInviteForm({ onSuccess, groupId, inviterId, groupName }) {
+export default function DisplayNameForm({ onSuccess, displayName}) {
 
     const {
         register,
@@ -17,7 +17,7 @@ export default function MemberInviteForm({ onSuccess, groupId, inviterId, groupN
         formState: { errors },
       } = useForm({
         mode: "onTouched",
-        resolver: zodResolver(inviteSchema),
+        resolver: zodResolver(displayNameSchema),
       })
 
     const [lastError, setLastError] = useState()
@@ -27,7 +27,7 @@ export default function MemberInviteForm({ onSuccess, groupId, inviterId, groupN
     const onSubmit = async (data) => {
         try {
             setSaving(true)
-            await InviteMember(data, groupId, inviterId, groupName)
+            await updateDisplayName(data)
             onSuccess()
         } catch (error) {
             setLastError(error)
@@ -39,13 +39,13 @@ export default function MemberInviteForm({ onSuccess, groupId, inviterId, groupN
     return (
 
         <form action={handleSubmit(onSubmit)} className="space-y-6">
-          <h1 className="text-center font-semibold pb-4">Invite a new member</h1>
-          <Input {...register("email")} name="email" id="email" placeholder="User Email" type="email"/>
-          <button type="submit" size="sm" className="btn w-full dark:btn-primary btn-neutral" disabled={isSaving}>
-            Send Invite
+          <h1 className="text-center font-semibold pb-4">Update Display Name</h1>
+          <Input {...register("display_name")} name="display_name" id="display_name" placeholder="Display Name" type="display_name"/>
+          <button type="submit" size="sm" className="btn w-full btn-primary" disabled={isSaving}>
+            Update
           </button>
           <div className="space-y-4">
-            <FormError error={errors.email}/>
+            <FormError error={errors.display_name}/>
             <FormError error={lastError}/>
           </div>
         </form>

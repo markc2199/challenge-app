@@ -22,6 +22,12 @@ export default async function Page({ params }) {
     notFound();
   }
 
+  // check if challenge is over
+  const today = new Date()
+  const endDate = new Date(challenge[0].end_date)
+ 
+  const isActive = today < endDate
+
   // get challenge item info
 
   let challengeItem
@@ -47,7 +53,13 @@ export default async function Page({ params }) {
           {/* Flex container for "My Groups" heading and Modal */}
   
           {/* The rest of your content */}
-          <ScoreModal challengeItemId={challengeItem[0]?.id} groupId={params.groupId} challengeId={params.challengeId}>Submit a score</ScoreModal>
+          {isActive && (
+            <div className="flex justify-end">
+            <ScoreModal challengeItemId={challengeItem[0]?.id} groupId={params.groupId} challengeId={params.challengeId}>Update Score</ScoreModal>
+          </div>
+          )}
+          
+          
           <Leaderboard challengeItemId={challengeItem[0]?.id} challengeItemUnit={challengeItem[0]?.name}/>
           
         </div>

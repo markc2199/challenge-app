@@ -13,17 +13,14 @@ export default async function Leaderboard({ challengeItemId, challengeItemUnit }
         console.log(error.message)
     }
 
-    console.log("scores on ld", scores)
-
     return (
         <>
         {scores.length > 0 && (
             <div className="overflow-x-auto w-full max-w-screen-md md:max-w-screen-lg lg:max-w-screen-xl mx-auto">
-  <table className="table w-full">
+  <table className="table w-full border rounded-lg overflow-hidden bg-slate-800">
     {/* head */}
-    <thead>
+    <thead className="bg-primary text-slate-800">
       <tr>
-        <th></th>
         <th>Name</th>
         <th>{challengeItemUnit}</th>
         <th className="hidden md:table-cell">Last Updated</th>

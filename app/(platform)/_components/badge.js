@@ -1,5 +1,5 @@
-export default function Badge({ children }) {
+export default function Badge(props) {
     return (
-        <div className="badge">{children}</div>
+        <div className={`badge ${props.className}`}>{props.children}</div>
     );
 }
