@@ -2,7 +2,6 @@
 
 import DisplayNameForm from "./display-name-form";
 import GhostModal from "./ghost-modal";
-import Modal from "./modal";
 
 export default function DisplayNameModal({ children }) {
 

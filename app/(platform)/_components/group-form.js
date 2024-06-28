@@ -26,10 +26,13 @@ export default function GroupForm({ onSuccess }) {
 
     const onSubmit = async (data) => {
         try {
+            setSaving(true)
             await createGroup(data)
             onSuccess()
         } catch (error) {
             setLastError(error)
+        } finally {
+          setSaving(false)
         }
     }
 

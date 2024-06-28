@@ -1,4 +1,4 @@
-import { getScores } from "@/utils/actions/challenge-actions";
+import { getIndividualScores, getScores } from "@/utils/actions/challenge-actions";
 import LeaderboardRow from "./leaderboard-row";
 
 export default async function Leaderboard({ challengeItemId, challengeItemUnit }) {
@@ -13,23 +13,29 @@ export default async function Leaderboard({ challengeItemId, challengeItemUnit }
         console.log(error.message)
     }
 
+    // get all the individual scores for this challenge item
+    let allScores
+    try {
+      allScores = await getIndividualScores(challengeItemId)
+    } catch (error) {
+      console.log(error.message)
+    }
+
     return (
         <>
         {scores.length > 0 && (
             <div className="overflow-x-auto w-full max-w-screen-md md:max-w-screen-lg lg:max-w-screen-xl mx-auto">
-  <table className="table w-full border rounded-lg overflow-hidden bg-slate-800">
+  <table className="table w-full rounded-lg overflow-hidden bg-slate-800">
     {/* head */}
     <thead className="bg-primary text-slate-800">
       <tr>
         <th>Name</th>
         <th>{challengeItemUnit}</th>
-        <th className="hidden md:table-cell">Last Updated</th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
     {scores.map((score) => {
-        return <LeaderboardRow key={score.user_id} name={score.display_name} email={score.email} totalScore={score.total_score}/>
+        return <LeaderboardRow key={score.user_id} userId={score.user_id} name={score.display_name} email={score.email} totalScore={score.total_score} challengeItem={challengeItemId} allScores={allScores}/>
     })}
     </tbody>
     {/* foot */}

@@ -26,7 +26,6 @@ export default async function NotificationList() {
 
             {invites.length > 0 && (
                invites.map((invite) => {
-                console.log("invite id:", invite.id)
                 return (
                 <InviteNotification key={invite.id} inviteId={invite.id}>
                     {`You've been invited to join ${invite.group_name}`}

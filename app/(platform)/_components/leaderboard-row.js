@@ -1,6 +1,7 @@
 import { User } from "lucide-react";
+import IndividualScoresModal from "./individual-scores-modal";
 
-export default function LeaderboardRow({ name, email, totalScore }) {
+export default function LeaderboardRow({ userId, name, email, totalScore, challengeItem, allScores }) {
     return (
        
         <tr>
@@ -18,12 +19,11 @@ export default function LeaderboardRow({ name, email, totalScore }) {
             </div>
           </td>
           <td>
-            {totalScore}
+            <IndividualScoresModal userId={userId} challengeItem={challengeItem} allScores={allScores}>
+              {totalScore}
+            </IndividualScoresModal>
+            
           </td>
-          <td className="hidden md:table-cell">6/23/2024</td>
-          <th>
-            <button className="hidden md:table-cell btn btn-ghost btn-xs">details</button>
-          </th>
         </tr>
    
     );

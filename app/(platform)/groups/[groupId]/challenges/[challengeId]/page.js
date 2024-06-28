@@ -1,7 +1,7 @@
 import Leaderboard from "@/app/(platform)/_components/leaderboard";
 import ScoreForm from "@/app/(platform)/_components/score-form";
 import ScoreModal from "@/app/(platform)/_components/score-modal";
-import { fetchChallengeData, fetchChallengeItem }from "@/utils/actions/challenge-actions";
+import { fetchChallengeData, fetchChallengeItem, getIndividualScores }from "@/utils/actions/challenge-actions";
 import { createClient } from "@/utils/supabase/server";
 import { notFound } from "next/navigation";
 
@@ -37,6 +37,9 @@ export default async function Page({ params }) {
   } catch (error) {
     console.log(error.message)
   }
+
+  
+
 
 
     return (

@@ -129,8 +129,6 @@ export async function getScores(challengeItemId) {
     .rpc('get_total_scores_for_item', { challenge_item_id_arg: challengeItemId })
     .select()
 
-    console.log('data: ', data)
-
     if (error) {
         throw new Error(`Cannot fetch scores: ${error.message}`)
     }
@@ -153,5 +151,26 @@ export async function fetchChallengeItem(challengeId) {
     }
 
     return challengeItem
+
+}
+
+export async function getIndividualScores(challengeItemId) {
+
+
+    const supabase = createClient()
+
+    let { data: scores, error } = await supabase
+    .from('scores')
+    .select("*")
+    .eq('challenge_item_id', challengeItemId)
+    .order('submitted_at', { ascending: true })
+
+    if (error) {
+        throw new Error("Error retrieving scores")
+    }
+
+    return scores
+        
+
 
 }
