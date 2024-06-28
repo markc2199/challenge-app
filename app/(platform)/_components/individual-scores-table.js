@@ -1,4 +1,3 @@
-import { getIndividualScores } from "@/utils/actions/challenge-actions";
 import IndividualScoresTableRow from "./individual-scores-table-row";
 
 export default async function IndividualScoresTable({ allScores, userId }) {

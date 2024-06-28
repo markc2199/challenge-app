@@ -1,6 +1,3 @@
-'use client'
-
-import { useEffect, useState } from "react";
 import GhostModal from "./ghost-modal";
 import IndividualScoresTable from "./individual-scores-table";
 
