@@ -40,7 +40,7 @@ export default async function Page() {
           </div>
         </div>
         {/* Flex container for "My Groups" heading and Modal */}
-        <div className="col-span-1 md:col-span-2 flex items-center justify-between pt-2 px-6">
+        <div className="col-span-1 md:col-span-2 flex items-center justify-between pt-2">
           <h6 className="font-bold text-2xl">My Groups</h6>
           <div>
             <GroupModal>
