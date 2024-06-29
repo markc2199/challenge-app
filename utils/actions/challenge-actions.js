@@ -15,9 +15,10 @@ export async function createChallenge(formData, groupId) {
     const today = new Date()
     const startDate = new Date(validated.data.start)
 
-    if (today > startDate) {
+    // Really needed?
+    /* if (today > startDate) {
         throw new Error("Start date cannot be in the past")
-    }
+    } */
 
     // TODO validate the end date is greater than the start date
     const endDate = new Date(validated.data.end)

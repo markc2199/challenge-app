@@ -6,7 +6,7 @@ export default function Page() {
             <div className="flex flex-col space-y-8 text-center">
                 <h1 className="text-2xl font-semibold">Login / Sign up</h1>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                Enter your email to sign in/create your account. No password is required.
+                Login with a social account. No password required.
                 </p>
             </div>
             <div>

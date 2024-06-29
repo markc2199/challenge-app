@@ -51,6 +51,7 @@ const {
   return (
     <>
     <OAuthLoginForm />
+
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <h1>Login</h1>
       <Input {...register("email")} name="email" id="email" placeholder="Email" type="email" inputvariant="email"/>

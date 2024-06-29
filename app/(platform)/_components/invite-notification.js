@@ -1,5 +1,5 @@
 'use client'
-import { acceptInvite } from "@/utils/actions/group-actions";
+import { acceptInvite, declineInvite } from "@/utils/actions/group-actions";
 import { useState } from "react";
 
 export default function InviteNotification({ children, inviteId }) {
@@ -19,6 +19,19 @@ export default function InviteNotification({ children, inviteId }) {
 
     }
 
+    const handleClickDecline = async (inviteId) => {
+
+        try {
+            setSaving(true)
+            await declineInvite(inviteId)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setSaving(false)
+        }
+
+    }
+
     return (
         <div role="alert" className="alert md:flex md:justify-between">
             <div className="flex space-x-1">
@@ -27,7 +40,7 @@ export default function InviteNotification({ children, inviteId }) {
             </div>
             
             <div className="space-x-4">
-                <button className="btn btn-sm">Deny</button>
+                <button onClick={() => handleClickDecline(inviteId)} disabled={isSaving} className="btn btn-sm">Deny</button>
                 <button onClick={() => handleClickAccept(inviteId)} disabled={isSaving} className="btn btn-sm btn-neutral dark:btn-primary">Accept</button>
             </div>
         </div>

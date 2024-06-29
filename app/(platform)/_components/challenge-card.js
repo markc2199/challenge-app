@@ -5,6 +5,22 @@ export default function ChallengeCard({ name, description, start_date, end_date,
 
     const today = new Date()
     const endDate = new Date(end_date)
+    const startDate = new Date(start_date)
+
+    let status;
+    if (today > startDate && today < endDate) {
+        status = 'Active'
+    } else if (startDate > today) {
+        status = 'Coming Soon'
+    } else {
+        status = 'Ended'
+    }
+
+    const statusBadge = {
+        'Active': 'badge-primary badge-outline',
+        'Ended': 'badge-neutral badge-outline',
+        'Coming Soon': 'badge-accent badge-outline'
+    }
 
 
     // check if challenge is still active
@@ -17,7 +33,7 @@ export default function ChallengeCard({ name, description, start_date, end_date,
                 <div className="space-y-1">
                     <div className="flex space-x-2 items-center">
                         <h2 className="card-title font-bold text-2xl">{name}</h2>
-                        <Badge className={`${isActive ? 'badge-primary badge-outline' : 'badge-neutral badge-outline'}`}>{isActive ? `Active` : 'Ended'}</Badge> 
+                        <Badge className={statusBadge[status]}>{status}</Badge> 
                     </div>
                     
                     <p className="text-lg">{description}</p>

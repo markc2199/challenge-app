@@ -25,8 +25,9 @@ export default async function Page({ params }) {
   // check if challenge is over
   const today = new Date()
   const endDate = new Date(challenge[0].end_date)
+  const startDate = new Date(challenge[0].start_date)
  
-  const isActive = today < endDate
+  const isActive = today < endDate && today > startDate
 
   // get challenge item info
 
@@ -37,10 +38,6 @@ export default async function Page({ params }) {
   } catch (error) {
     console.log(error.message)
   }
-
-  
-
-
 
     return (
         <div className="flex justify-center pt-10">

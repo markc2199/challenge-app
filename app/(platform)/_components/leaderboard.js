@@ -23,27 +23,27 @@ export default async function Leaderboard({ challengeItemId, challengeItemUnit }
 
     return (
         <>
-        {scores.length > 0 && (
+        {scores?.length > 0 && (
             <div className="overflow-x-auto w-full max-w-screen-md md:max-w-screen-lg lg:max-w-screen-xl mx-auto">
   <table className="table w-full rounded-lg overflow-hidden bg-slate-800">
     {/* head */}
-    <thead className="bg-primary text-slate-800">
+    <thead className="bg-primary text-slate-800 text-md md:text-lg">
       <tr>
         <th>Name</th>
         <th>{challengeItemUnit}</th>
       </tr>
     </thead>
     <tbody>
-    {scores.map((score) => {
-        return <LeaderboardRow key={score.user_id} userId={score.user_id} name={score.display_name} email={score.email} totalScore={score.total_score} challengeItem={challengeItemId} allScores={allScores}/>
+    {scores.map((score, index) => {
+        return <LeaderboardRow key={score.user_id} userId={score.user_id} name={score.display_name} email={score.email} totalScore={score.total_score} challengeItem={challengeItemId} allScores={allScores} leader={index === 0 ? true : false}/>
     })}
     </tbody>
     {/* foot */}
   </table>
 </div>
         )}
-        {scores.length < 1 && (
-            <p>No scores, yet. Be the first!</p>
+        {scores?.length < 1 && (
+            <p>No scores yet!</p>
         )}
         
         </>

@@ -209,12 +209,33 @@ export async function acceptInvite(inviteId) {
     .select()
 
     if (error) {
-        throw new Error("Error accepting invite: ", error)
+        throw new Error(`Error accepting the invite: ${error.message}`)
     }
 
     revalidatePath('/dashboard')
 
     //once the status is updated to accepted, a supabase trigger adds a record in group_membership table
+        
+}
+
+export async function declineInvite(inviteId) {
+
+    const supabase = createClient()
+
+
+        // update invite to declined
+
+        const { data, error } = await supabase
+        .from('invites')
+        .update({ invite_status: 'rejected' })
+        .eq('id', inviteId)
+        .select()
+
+        if (error) {
+            throw new Error(`Error declining invite: ${error.message}`)
+        }
+
+        revalidatePath('/dashboard')
         
 }
 

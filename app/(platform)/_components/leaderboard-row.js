@@ -1,7 +1,7 @@
 import { User } from "lucide-react";
 import IndividualScoresModal from "./individual-scores-modal";
 
-export default function LeaderboardRow({ userId, name, email, totalScore, challengeItem, allScores }) {
+export default function LeaderboardRow({ userId, name, email, totalScore, challengeItem, allScores, leader }) {
     return (
        
         <tr>
@@ -14,7 +14,10 @@ export default function LeaderboardRow({ userId, name, email, totalScore, challe
               </div> */}
               <div className="flex space-x-2 items-center justify-center">
                 <div className="md:w-12 md:h-12 w-8 h-8"><User /></div>
-                <div className="font-bold items-center">{name ?? email}</div>
+                <div className="font-bold items-center text-md md:text-lg">{name ?? email}</div>
+                {leader && (
+                  <div className="text-md md:text-lg">👑</div>
+                )}
               </div>
             </div>
           </td>

@@ -2,8 +2,6 @@ import SignOutButton from "@/app/(platform)/_components/sign-out-button";
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 
-
-
 export default async function NavBar() {
 
     const supabase = createClient()

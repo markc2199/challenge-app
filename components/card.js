@@ -23,7 +23,7 @@ export default async function Card({ name, description, groupId }) {
         <div className="card-body bg-slate-600 rounded-lg">
             <div className="flex items-center space-x-2">
                <h2 className="card-title font-bold">{name}</h2>
-               {role[0].role === 'owner' && (
+               {role[0]?.role === 'owner' && (
                 <Badge>Owner</Badge>
                )}    
             </div>
