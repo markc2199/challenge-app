@@ -40,3 +40,11 @@ export const displayNameSchema = z.object({
         message: "Must be at least 1 character"
     })
 })
+
+export const avatarSchema = z
+    .instanceof(File)
+    .refine((file) => {
+        return !file
+    }, 'Please select a file')
+
+export const anySchema = z.any()

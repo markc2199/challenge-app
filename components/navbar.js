@@ -1,5 +1,8 @@
+import Avatar from "@/app/(platform)/_components/avatar";
+import AvatarModal from "@/app/(platform)/_components/avatar-modal";
 import SignOutButton from "@/app/(platform)/_components/sign-out-button";
 import { createClient } from "@/utils/supabase/server";
+import { User } from "lucide-react";
 import Link from "next/link";
 
 export default async function NavBar() {
@@ -15,7 +18,12 @@ export default async function NavBar() {
             
             {user && (
                 <div className="navbar-end">
-                <SignOutButton />
+                    <div className="flex space-x-4 items-center">
+                        <AvatarModal>
+                            <Avatar />
+                        </AvatarModal>
+                        <SignOutButton />
+                    </div>
               </div>
             )}
             {!user && (

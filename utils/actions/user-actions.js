@@ -36,3 +36,43 @@ export async function updateDisplayName(formData) {
     // revalidate path
     revalidatePath('/dashboard')
 }
+
+export async function uploadAvatar(formData) {
+
+    const supabase = createClient()
+    const {data: {user}} = await supabase.auth.getUser()
+    const file = formData.get('file')
+
+    if (file.name === undefined) {
+        throw new Error("Please select a file")
+    }
+
+    const path = formData.get('path')
+
+    // Original extension of the file
+    // File name will be generated
+    const fileExt = file.name.split('.').pop()
+    const fileName = `${user.id}-${Math.random()}.${fileExt}`
+
+    const { error } = await supabase.storage
+        .from('avatars')
+        .upload(fileName, file)
+
+    if (error) {
+        throw new Error("Error uploading avatar")
+    }
+
+    // Update user profile
+
+    const { error: updateProfileError } = await supabase
+        .from('profiles')
+        .update({ avatar: fileName })
+        .eq('id', user.id)
+
+    if(updateProfileError) {
+        throw new Error('Error associating avatar with user')
+    }
+
+    revalidatePath(path)
+
+}
