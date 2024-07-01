@@ -6,31 +6,37 @@ import { User } from "lucide-react";
 import Link from "next/link";
 
 export default async function NavBar() {
+  const supabase = createClient();
+  const { data: { user }, error } = await supabase.auth.getUser();
 
-    const supabase = createClient()
-    const { data: {user}, error } = await supabase.auth.getUser()
+  return (
+    <div className="navbar bg-base-100 text-neutral-content flex justify-between md:px-11 p-0">
+      <div className="flex items-center space-x-1">
+        <Link href="/">
+          <button className="btn btn-ghost text-primary text-left text-lg p-0 md:px-4">
+            <span className="flex items-center">
+              <img className="rounded-full" src="/logo/v2-challenger-logo.png" width={25} height={25} />
+              <div className="ml-2">challenger</div>
+            </span>
+          </button>
+        </Link>
+      </div>
 
-    return (
-        <div className="navbar bg-base-100 text-neutral-content flex justify-between md:px-11 p-0">
-            <Link className="text-left text-primary font-bold" href="/">
-                <button className="btn btn-ghost text-primary text-left text-lg">challenger</button>
-            </Link>
-            
-            {user && (
-                <div className="navbar-end">
-                    <div className="flex space-x-4 items-center">
-                        <AvatarModal>
-                            <Avatar />
-                        </AvatarModal>
-                        <SignOutButton />
-                    </div>
-              </div>
-            )}
-            {!user && (
-                <Link href="/login">
-                    <button className="btn btn-ghost text-primary text-left text-lg">Login</button>
-                </Link>
-            )}
+      {user && (
+        <div className="navbar-end">
+          <div className="flex space-x-4 items-center">
+            <AvatarModal>
+              <Avatar />
+            </AvatarModal>
+            <SignOutButton />
+          </div>
         </div>
-    );
+      )}
+      {!user && (
+        <Link href="/login">
+          <button className="btn btn-ghost text-primary text-left text-lg">Login</button>
+        </Link>
+      )}
+    </div>
+  );
 }
