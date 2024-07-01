@@ -12,8 +12,8 @@ export default async function NavBar() {
 
     return (
         <div className="navbar bg-base-100 text-neutral-content flex justify-between md:px-11 p-0">
-            <Link className="text-left text-primary font-bold hover:underline text-lg underline-offset-2" href="/">
-                challenger
+            <Link className="text-left text-primary font-bold" href="/">
+                <button className="btn btn-ghost text-primary text-left text-lg">challenger</button>
             </Link>
             
             {user && (
@@ -28,9 +28,8 @@ export default async function NavBar() {
             )}
             {!user && (
                 <Link href="/login">
-                    <button className="btn btn-primary text-left">Login</button>
+                    <button className="btn btn-ghost text-primary text-left text-lg">Login</button>
                 </Link>
-                
             )}
         </div>
     );

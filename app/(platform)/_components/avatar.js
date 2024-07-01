@@ -26,7 +26,7 @@ export default async function Avatar({ width = 32, height = 32, user_id }) {
 
     const {data: imageData, error} = await supabase.storage
         .from('avatars')
-        .createSignedUrl(profile[0].avatar, 60 * 5)
+        .createSignedUrl(profile[0].avatar, 60 * 60 * 24)
 
     if (error) {
         return <User />
@@ -35,8 +35,8 @@ export default async function Avatar({ width = 32, height = 32, user_id }) {
     //return <Image src={imageData.signedUrl} width={width} height={height} alt='user avatar' className="rounded-lg"/>
 
     return (
-        <div className="avatar">
-            <div className="rounded-full">
+        <div className="avatar flex items-center justify-center">
+            <div className="rounded-full flex items-center justify-center">
                 <Image src={imageData.signedUrl} width={width} height={height} alt='user avatar' className="rounded-lg"/>
             </div>
         </div>

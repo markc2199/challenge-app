@@ -62,6 +62,27 @@ export async function uploadAvatar(formData) {
         throw new Error("Error uploading avatar")
     }
 
+    // Remove the old avatar
+    const { data: currentAvatar, error: getCurrentAvatarError } =  await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single()
+
+    if (getCurrentAvatarError) {
+        throw new Error("Error getting current avatar for deletion")
+    }
+
+    if (currentAvatar.avatar) {
+        const { error } = await supabase.storage
+            .from('avatars')
+            .remove([currentAvatar.avatar])
+
+        if (error) {
+            throw new Error("Error deleting old avatar")
+        }
+    }
+
     // Update user profile
 
     const { error: updateProfileError } = await supabase
@@ -74,5 +95,4 @@ export async function uploadAvatar(formData) {
     }
 
     revalidatePath(path)
-
 }

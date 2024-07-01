@@ -13,7 +13,6 @@ export default function InviteNotification({ children, inviteId }) {
             await acceptInvite(inviteId)
         } catch (error) {
             console.log(error)
-        } finally {
             setSaving(false)
         }
 
@@ -26,9 +25,8 @@ export default function InviteNotification({ children, inviteId }) {
             await declineInvite(inviteId)
         } catch (error) {
             console.log(error)
-        } finally {
             setSaving(false)
-        }
+        } 
 
     }
 
