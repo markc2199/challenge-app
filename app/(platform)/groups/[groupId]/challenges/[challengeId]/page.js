@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 export default async function Page({ params }) {
 
 
-      // get user
+  // get user
   const supabase = createClient();
 
   const { data: { user }, error } = await supabase.auth.getUser();
@@ -23,10 +23,17 @@ export default async function Page({ params }) {
   }
 
   // check if challenge is over
-  const today = new Date()
-  const endDate = new Date(challenge[0].end_date)
+  let today = new Date()
+  // Subtract 4 hours to get the time to EST (default is UTC)
+  today.setHours(today.getHours() - 4)
+
+  let endDate = new Date(challenge[0].end_date)
+  // Add 23 hours, 59 minutes, and 59 seconds
+  endDate.setHours(endDate.getHours() + 23);
+  endDate.setMinutes(endDate.getMinutes() + 59);
+  endDate.setSeconds(endDate.getSeconds() + 59);
   const startDate = new Date(challenge[0].start_date)
- 
+
   const isActive = today < endDate && today > startDate
 
   // get challenge item info

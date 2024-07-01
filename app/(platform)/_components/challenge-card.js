@@ -3,9 +3,16 @@ import Badge from "./badge";
 
 export default function ChallengeCard({ name, description, start_date, end_date, challengeId, groupId }) {
 
-    const today = new Date()
-    const endDate = new Date(end_date)
-    const startDate = new Date(start_date)
+    let today = new Date()
+    // Subtract 4 hours to get the time to EST (default is UTC)
+    today.setHours(today.getHours() - 4)
+
+    let endDate = new Date(end_date)
+    // Add 23 hours, 59 minutes, and 59 seconds
+    endDate.setHours(endDate.getHours() + 23);
+    endDate.setMinutes(endDate.getMinutes() + 59);
+    endDate.setSeconds(endDate.getSeconds() + 59);
+    let startDate = new Date(start_date)
 
     let status;
     if (today > startDate && today < endDate) {
