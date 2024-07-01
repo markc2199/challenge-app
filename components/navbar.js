@@ -25,6 +25,11 @@ export default async function NavBar() {
       {user && (
         <div className="navbar-end">
           <div className="flex space-x-4 items-center">
+            <a target="_blank" href='https://insigh.to/b/challenger'>
+                <button className="btn btn-ghost">
+                    Feedback?
+                </button>
+            </a>
             <AvatarModal>
               <Avatar />
             </AvatarModal>

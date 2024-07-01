@@ -55,10 +55,12 @@ export default function ChallengeForm({ onSuccess, groupId }) {
             <FormError error={errors.item}/>
           </div>
           <div className="space-y-2">
+            <label className="text-sm text-slate-400" htmlFor="start">Start Date</label>
             <Input {...register("start")} name="start" id="start" placeholder="Start Date" type="date"/>
             <FormError error={errors.start}/>
           </div>
           <div className="space-y-2">
+            <label className="text-sm text-slate-400" htmlFor="end">End Date</label>
             <Input {...register("end")} name="end" id="end" placeholder="End Date" type="date"/>
             <FormError error={errors.end}/>
           </div>

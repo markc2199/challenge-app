@@ -31,7 +31,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col md:flex-row md:items-start space-y-4 md:space-y-0 md:space-x-4">
+      <div className="w-full flex flex-col md:flex-row md:items-start space-y-4 md:space-y-0 md:space-x-4 pt-8">
         <div className="flex flex-col justify-start w-full md:w-1/2">
           <h3 className="text-2xl md:text-5xl font-semibold text-center md:text-left md:pt-6">Stay Motivated with Leaderboards</h3>
           <p className="mt-4 text-center md:text-left md:text-xl">
@@ -43,7 +43,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-full pt-16">
+      <div className="w-full pt-36">
         <FeatureSection />
       </div>
     </div>

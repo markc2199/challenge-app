@@ -1,6 +1,6 @@
 import { fetchGroupData } from "@/utils/actions/group-actions";
 import { notFound } from "next/navigation";
-import { PlusCircle } from "lucide-react";
+import { Trophy, UserPlus } from "lucide-react";
 import { createClient } from "@/utils/supabase/server";
 import InviteModal from "../../_components/invite-modal";
 import ChallengeModal from "../../_components/challenge-modal";
@@ -40,14 +40,14 @@ export default async function Page({ params }) {
               <div>
                 <InviteModal groupName={group[0].name} groupId={group[0].id} inviterId={user.id}>
                   <span className="hidden md:block">Invite Members</span>
-                  <PlusCircle />
+                  <UserPlus />
                 </InviteModal>
               </div>
 
               <div>
                 <ChallengeModal groupId={params.groupId}>
                   <span className="hidden md:block">Create New Challenge</span>
-                  <PlusCircle />
+                  <Trophy />
                 </ChallengeModal>
               </div>
             </div>

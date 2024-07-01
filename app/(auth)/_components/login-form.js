@@ -52,7 +52,7 @@ const {
     <>
     <OAuthLoginForm />
 
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+    {/* <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
       <h1>Login</h1>
       <Input {...register("email")} name="email" id="email" placeholder="Email" type="email" inputvariant="email"/>
       <button type="submit" size="sm" className="btn w-full" disabled={isSaving}>
@@ -63,7 +63,7 @@ const {
         <FormError error={lastError}/>
         {success && <p className="text-green-500 text-sm text-center">{success}</p>}
       </div>
-    </form>
+    </form> */}
     </>
   );
 }
