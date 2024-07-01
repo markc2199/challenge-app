@@ -3,6 +3,7 @@
 import { FlipWords } from "@/components/flip-words";
 import FeatureSection from "./_components/feature-section";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   const words = ["Creating", "Managing", "Winning"];
@@ -15,13 +16,13 @@ export default function Home() {
           <FlipWords words={words} /> <br />
           Group Challenges
           <p className="text-base md:text-lg lg:text-xl text-center text-slate-400 font-light mt-6">
-            Whether you're looking to get fit, learn something new, or just have fun with friends and family, Challenger is the perfect platform to keep you motivated.
+            Whether you are looking to get fit, learn something new, or just have fun with friends and family, Challenger is the perfect platform to keep you motivated.
           </p>
           <div className="flex justify-center pt-16">
             <Link href='/login'>
             <button className="btn btn-outline btn-primary px-12">
               <span className="flex items-center space-x-2">
-                <img className="rounded-full" src="/logo/v2-challenger-logo.png" width={25} height={25}/>
+                <Image className="rounded-full" src="/logo/v2-challenger-logo.png" width={25} height={25} alt="challenger logo"/>
                 <span>Get Started</span>
               </span>
             </button>
@@ -39,7 +40,7 @@ export default function Home() {
           </p>
         </div>
         <div className="flex justify-center w-full md:w-1/2">
-          <img src="/marketing/lb-screenshot.png" alt="Leaderboard Screenshot" className="rounded-lg shadow-lg" />
+          <Image src="/marketing/lb-screenshot.png" alt="Leaderboard Screenshot" className="rounded-lg shadow-lg" width={450} height={450}/>
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import AvatarModal from "@/app/(platform)/_components/avatar-modal";
 import SignOutButton from "@/app/(platform)/_components/sign-out-button";
 import { createClient } from "@/utils/supabase/server";
 import { User } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function NavBar() {
@@ -15,7 +16,7 @@ export default async function NavBar() {
         <Link href="/">
           <button className="btn btn-ghost text-primary text-left text-lg p-0 md:px-4">
             <span className="flex items-center">
-              <img className="rounded-full" src="/logo/v2-challenger-logo.png" width={25} height={25} />
+              <Image className="rounded-full" src="/logo/v2-challenger-logo.png" width={25} height={25} alt="challenger logo" />
               <div className="ml-2">challenger</div>
             </span>
           </button>
