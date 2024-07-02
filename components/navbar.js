@@ -12,7 +12,7 @@ export default async function NavBar() {
 
   return (
     <div className="navbar bg-base-100 text-neutral-content flex justify-between md:px-11 p-0">
-      <div className="flex items-center space-x-10">
+      <div className="flex items-center space-x-1">
         <Link href="/">
           <button className="btn btn-ghost text-primary text-left text-lg p-0 md:px-4">
             <span className="flex items-center">
@@ -21,21 +21,17 @@ export default async function NavBar() {
             </span>
           </button>
         </Link>
-        <div>
-          <a target="_blank" href='https://insigh.to/b/challenger'>
-                <button className="btn btn-ghost text-xs md:text-md">
-                    Feedback?
-                </button>
-            </a>
-        </div>
         
-
       </div>
 
       {user && (
         <div className="navbar-end">
           <div className="flex space-x-4 items-center">
-            
+            <a target="_blank" href='https://insigh.to/b/challenger' className="hidden md:block">
+                <button className="btn btn-ghost text-xs md:text-md">
+                    Feedback?
+                </button>
+            </a>
             <AvatarModal>
               <Avatar />
             </AvatarModal>
