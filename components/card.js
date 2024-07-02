@@ -28,7 +28,7 @@ export default async function Card({ name, description, groupId }) {
                )}    
             </div>
     
-            <div className="flex justify-between">
+            <div className="flex justify-between space-x-2">
                 <p>{description}</p>
                 <Link href={`/groups/${groupId}`}>
                     <button className="btn btn-square btn-md btn-primary">
